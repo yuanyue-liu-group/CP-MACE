@@ -427,8 +427,8 @@ class ScaleShiftMACE(MACE):
     ):
         super().__init__(**kwargs)
 
-        self.register_buffer("mean_potential", torch.tensor([mean_potential], dtype=torch.float64))
-        self.register_buffer("mean_electron", torch.tensor([mean_electron], dtype=torch.float64))
+        self.register_buffer("mean_potential", torch.tensor([mean_potential], dtype=torch.get_default_dtype()))
+        self.register_buffer("mean_electron", torch.tensor([mean_electron], dtype=torch.get_default_dtype()))
 
         self.scale_shift = ScaleShiftBlock(
             scale=atomic_inter_scale, shift=atomic_inter_shift
@@ -1013,7 +1013,7 @@ class AtomicDipolesMACE(torch.nn.Module):
         self.register_buffer(
             "atomic_numbers", torch.tensor(atomic_numbers, dtype=torch.int64)
         )
-        self.register_buffer("r_max", torch.tensor(r_max, dtype=torch.float64))
+        self.register_buffer("r_max", torch.tensor(r_max, dtype=torch.get_default_dtype()))
         self.register_buffer(
             "num_interactions", torch.tensor(num_interactions, dtype=torch.int64)
         )
@@ -1215,7 +1215,7 @@ class EnergyDipolesMACE(torch.nn.Module):
         self.register_buffer(
             "atomic_numbers", torch.tensor(atomic_numbers, dtype=torch.int64)
         )
-        self.register_buffer("r_max", torch.tensor(r_max, dtype=torch.float64))
+        self.register_buffer("r_max", torch.tensor(r_max, dtype=torch.get_default_dtype()))
         self.register_buffer(
             "num_interactions", torch.tensor(num_interactions, dtype=torch.int64)
         )
