@@ -248,8 +248,11 @@ class NoseHoover(MolecularDynamics):
         self.lagrange = np.zeros(len(self.constraints))
         if self.constraints and len(self.constraints[0]) > 0: 
             vel_half, converged = self.constrained_md()
-            self.constraints[0][3] = self.constraints[0][3] + self.increm
-            print("distance: " + str(self.constraints[0][3]))
+            #self.constraints[0][3] = self.constraints[0][3] + self.increm
+            #print("distance: " + str(self.constraints[0][3]))
+            for c in self.constraints:
+                c[-1] += self.increm
+            print("distance: " + str(self.constraints[0][-1]))
 
         self.cvgd.append(converged)
         self.atoms.set_velocities(vel_half)
